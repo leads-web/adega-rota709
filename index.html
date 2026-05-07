@@ -1,0 +1,788 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Adega Rota 709 | Cerveja Gelada com Entrega em Itapevi</title>
+  <meta name="description" content="Adega Rota 709 — bebida gelada com entrega rápida em Itapevi e região. Cervejas, destilados, energéticos, drinks. Peça agora pelo WhatsApp."/>
+  <meta name="keywords" content="adega em Itapevi, bebidas delivery Itapevi, adega aberta agora, cerveja gelada entrega rápida, adega rota 709"/>
+  <meta property="og:title" content="Adega Rota 709 — Bebida Gelada em Minutos"/>
+  <meta property="og:description" content="Entrega rápida em Itapevi e região. Peça agora pelo WhatsApp ou Anota.ai."/>
+  <meta property="og:type" content="website"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <style>
+/* ====================================================
+   DESIGN TOKENS
+==================================================== */
+:root {
+  --void:     #06080b;
+  --deep:     #0c0f14;
+  --surface:  #111620;
+  --raised:   #181e2a;
+  --edge:     rgba(255,255,255,.07);
+  --edge2:    rgba(255,255,255,.12);
+
+  --lime:     #c6ff00;
+  --lime-dim: rgba(198,255,0,.12);
+  --lime-mid: rgba(198,255,0,.06);
+  --scarlet:  #ff2d3a;
+  --scarlet-dim: rgba(255,45,58,.15);
+  --amber:    #ff9500;
+
+  --white:    #f2f4f0;
+  --muted:    #7a8494;
+  --dim:      #3d4454;
+
+  --r:        12px;
+  --r-lg:     18px;
+  --r-xl:     24px;
+}
+
+/* ====================================================
+   BASE
+==================================================== */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased}
+body{
+  background:var(--void);
+  color:var(--white);
+  font-family:'Outfit',sans-serif;
+  font-size:16px;
+  overflow-x:hidden;
+}
+a{text-decoration:none;color:inherit}
+img{display:block;max-width:100%}
+
+/* ====================================================
+   NOISE OVERLAY (grain texture)
+==================================================== */
+body::before{
+  content:'';
+  position:fixed;inset:0;z-index:1000;pointer-events:none;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+  opacity:.025;
+}
+
+/* ====================================================
+   FLOATING WHATSAPP
+==================================================== */
+#fab{
+  position:fixed;bottom:22px;right:18px;z-index:9999;
+  width:56px;height:56px;border-radius:50%;
+  background:#25d366;
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:0 0 0 0 rgba(37,211,102,.6);
+  animation:pulsefab 2.4s ease infinite;
+  transition:transform .2s;
+}
+#fab:hover{transform:scale(1.1)}
+#fab svg{width:28px;height:28px;fill:#fff}
+@keyframes pulsefab{
+  0%{box-shadow:0 0 0 0 rgba(37,211,102,.55)}
+  70%{box-shadow:0 0 0 16px rgba(37,211,102,0)}
+  100%{box-shadow:0 0 0 0 rgba(37,211,102,0)}
+}
+
+/* ====================================================
+   TOPBAR
+==================================================== */
+#topbar{
+  position:fixed;top:0;inset-inline:0;z-index:800;
+  height:52px;
+  background:rgba(6,8,11,.82);
+  backdrop-filter:blur(18px);
+  border-bottom:1px solid var(--edge);
+  display:flex;align-items:center;
+  padding:0 18px;
+  gap:12px;
+}
+.tb-logo{
+  font-family:'Syne',sans-serif;
+  font-weight:800;font-size:1rem;letter-spacing:.06em;
+  color:var(--lime);
+  text-shadow:0 0 18px rgba(198,255,0,.4);
+  flex:1;
+}
+.tb-open{
+  display:flex;align-items:center;gap:6px;
+  font-size:.72rem;font-weight:500;
+  color:var(--lime);letter-spacing:.05em;
+}
+.tb-dot{
+  width:7px;height:7px;border-radius:50%;
+  background:var(--lime);
+  box-shadow:0 0 8px var(--lime);
+  animation:blink 1.6s ease infinite;
+}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
+.tb-btn{
+  background:var(--scarlet);color:#fff;
+  border:none;border-radius:8px;
+  padding:7px 16px;font-family:'Outfit',sans-serif;
+  font-size:.78rem;font-weight:600;letter-spacing:.04em;
+  cursor:pointer;white-space:nowrap;
+  transition:background .2s,transform .15s;
+}
+.tb-btn:hover{background:#e01f2b;transform:translateY(-1px)}
+
+/* ====================================================
+   HERO
+==================================================== */
+#hero{
+  min-height:100dvh;
+  display:flex;flex-direction:column;
+  justify-content:flex-end;
+  padding:0 0 52px;
+  position:relative;overflow:hidden;
+  background:var(--void);
+}
+/* diagonal accent block */
+#hero::before{
+  content:'';
+  position:absolute;top:-120px;right:-80px;
+  width:340px;height:340px;
+  background:conic-gradient(from 200deg, rgba(198,255,0,.08), rgba(255,45,58,.06), transparent 60%);
+  border-radius:50%;
+  filter:blur(60px);
+  pointer-events:none;
+}
+#hero::after{
+  content:'';
+  position:absolute;bottom:0;left:0;right:0;
+  height:160px;
+  background:linear-gradient(to top, var(--void), transparent);
+  pointer-events:none;
+}
+.hero-bg-text{
+  position:absolute;
+  top:50%;left:50%;
+  transform:translate(-50%,-50%);
+  font-family:'Syne',sans-serif;
+  font-weight:800;
+  font-size:clamp(5rem,28vw,16rem);
+  letter-spacing:-.04em;
+  color:transparent;
+  -webkit-text-stroke:1px rgba(255,255,255,.04);
+  white-space:nowrap;
+  pointer-events:none;
+  user-select:none;
+}
+.hero-content{
+  position:relative;z-index:2;
+  padding:0 20px;
+}
+.hero-chip{
+  display:inline-flex;align-items:center;gap:7px;
+  background:var(--raised);
+  border:1px solid var(--edge2);
+  border-radius:999px;padding:5px 14px;
+  font-size:.72rem;font-weight:500;letter-spacing:.06em;text-transform:uppercase;
+  color:var(--muted);margin-bottom:22px;
+  animation:fadeup .5s .1s both;
+}
+.hero-chip b{color:var(--lime)}
+.hero-title{
+  font-family:'Syne',sans-serif;
+  font-weight:800;
+  font-size:clamp(2.8rem,11.5vw,5.5rem);
+  line-height:.95;letter-spacing:-.03em;
+  margin-bottom:18px;
+  animation:fadeup .5s .22s both;
+}
+.hero-title .hl{
+  display:block;
+  color:var(--lime);
+  text-shadow:0 0 40px rgba(198,255,0,.35);
+}
+.hero-sub{
+  font-size:clamp(1rem,4vw,1.25rem);
+  font-weight:300;color:rgba(242,244,240,.65);
+  margin-bottom:32px;line-height:1.55;
+  max-width:380px;
+  animation:fadeup .5s .34s both;
+}
+.hero-ctas{
+  display:flex;flex-direction:column;gap:12px;
+  animation:fadeup .5s .46s both;
+}
+.cta-wa{
+  display:flex;align-items:center;justify-content:center;gap:10px;
+  background:var(--scarlet);color:#fff;
+  border-radius:var(--r-lg);padding:18px 22px;
+  font-family:'Syne',sans-serif;
+  font-size:1rem;font-weight:700;letter-spacing:.04em;
+  box-shadow:0 8px 32px rgba(255,45,58,.3);
+  transition:transform .18s,box-shadow .18s,background .18s;
+  position:relative;overflow:hidden;
+}
+.cta-wa::after{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(135deg,rgba(255,255,255,.12),transparent 60%);
+  pointer-events:none;
+}
+.cta-wa:hover{transform:translateY(-2px);box-shadow:0 14px 40px rgba(255,45,58,.45);background:#e01f2b}
+.cta-wa:active{transform:translateY(0)}
+.cta-anota{
+  display:flex;align-items:center;justify-content:center;gap:10px;
+  background:var(--surface);color:var(--white);
+  border:1px solid var(--edge2);
+  border-radius:var(--r-lg);padding:18px 22px;
+  font-family:'Syne',sans-serif;
+  font-size:1rem;font-weight:700;letter-spacing:.04em;
+  transition:transform .18s,border-color .18s,background .18s;
+}
+.cta-anota:hover{transform:translateY(-2px);border-color:rgba(255,255,255,.25);background:var(--raised)}
+.hero-foot{
+  display:flex;gap:20px;flex-wrap:wrap;
+  margin-top:28px;padding-top:24px;
+  border-top:1px solid var(--edge);
+  animation:fadeup .5s .58s both;
+}
+.hero-stat{display:flex;flex-direction:column;gap:2px}
+.hero-stat-v{
+  font-family:'Syne',sans-serif;font-weight:700;font-size:1rem;
+  color:var(--white);
+}
+.hero-stat-l{font-size:.7rem;color:var(--muted);text-transform:uppercase;letter-spacing:.08em}
+
+/* ====================================================
+   URGENCY BAND
+==================================================== */
+#urgency{
+  background:var(--scarlet);
+  overflow:hidden;height:40px;display:flex;align-items:center;
+}
+.ticker{
+  display:flex;white-space:nowrap;
+  animation:ticker 20s linear infinite;
+  gap:0;
+}
+.ticker-item{
+  font-family:'Syne',sans-serif;font-weight:700;
+  font-size:.8rem;letter-spacing:.1em;text-transform:uppercase;
+  padding:0 24px;color:#fff;
+  display:flex;align-items:center;gap:16px;
+}
+.ticker-item::after{content:'·';opacity:.5}
+@keyframes ticker{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* ====================================================
+   PILLS (urgency signals)
+==================================================== */
+#pills{
+  display:grid;grid-template-columns:repeat(3,1fr);
+  border-bottom:1px solid var(--edge);
+}
+.pill{
+  display:flex;flex-direction:column;align-items:center;
+  padding:22px 12px;text-align:center;
+  border-right:1px solid var(--edge);
+  background:var(--deep);
+  gap:6px;
+}
+.pill:last-child{border-right:none}
+.pill-icon{font-size:1.5rem}
+.pill-t{
+  font-family:'Syne',sans-serif;font-weight:700;
+  font-size:.82rem;letter-spacing:.04em;
+  color:var(--lime);
+}
+.pill-s{font-size:.68rem;color:var(--muted)}
+
+/* ====================================================
+   SECTION BASE
+==================================================== */
+.sec{padding:60px 20px}
+.sec-tag{
+  font-size:.68rem;font-weight:600;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--muted);
+  margin-bottom:8px;
+}
+.sec-h{
+  font-family:'Syne',sans-serif;font-weight:800;
+  font-size:clamp(1.8rem,7vw,2.8rem);
+  line-height:1;letter-spacing:-.02em;
+  margin-bottom:8px;
+}
+.sec-sub{
+  font-size:.9rem;color:var(--muted);
+  margin-bottom:32px;line-height:1.6;
+}
+
+/* ====================================================
+   PRODUCTS
+==================================================== */
+#produtos{background:var(--deep)}
+.prod-grid{
+  display:grid;grid-template-columns:repeat(2,1fr);
+  gap:10px;
+}
+.prod{
+  background:var(--surface);
+  border:1px solid var(--edge);
+  border-radius:var(--r-xl);
+  overflow:hidden;
+  display:flex;flex-direction:column;
+  transition:border-color .2s,transform .2s;
+  position:relative;
+}
+.prod:hover{border-color:var(--edge2);transform:translateY(-3px)}
+.prod-thumb{
+  height:90px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:2.8rem;
+  background:var(--raised);
+  position:relative;overflow:hidden;
+}
+.prod-thumb::after{
+  content:'';
+  position:absolute;inset:0;
+  background:linear-gradient(180deg,transparent 40%,var(--surface));
+}
+.prod-body{padding:14px 14px 16px;flex:1;display:flex;flex-direction:column;gap:8px}
+.prod-name{
+  font-family:'Syne',sans-serif;font-weight:700;
+  font-size:.95rem;letter-spacing:.02em;
+}
+.prod-desc{font-size:.74rem;color:var(--muted);line-height:1.5;flex:1}
+.prod-cta{
+  display:flex;align-items:center;justify-content:center;gap:6px;
+  background:var(--lime-dim);
+  border:1px solid rgba(198,255,0,.2);
+  color:var(--lime);
+  border-radius:var(--r);padding:9px;
+  font-family:'Syne',sans-serif;font-weight:700;
+  font-size:.78rem;letter-spacing:.04em;
+  transition:background .18s,border-color .18s;
+}
+.prod-cta:hover{background:rgba(198,255,0,.2);border-color:rgba(198,255,0,.4)}
+.prod-full{grid-column:1/-1}
+.prod-full .prod-thumb{height:72px}
+
+/* ====================================================
+   SOCIAL PROOF
+==================================================== */
+#prova{background:var(--void)}
+.stats-row{display:flex;gap:10px;margin-bottom:28px}
+.stat{
+  flex:1;background:var(--surface);
+  border:1px solid var(--edge);
+  border-radius:var(--r-lg);
+  padding:20px 14px;text-align:center;
+}
+.stat-n{
+  font-family:'Syne',sans-serif;font-weight:800;
+  font-size:2rem;line-height:1;
+  color:var(--lime);
+  text-shadow:0 0 20px rgba(198,255,0,.3);
+}
+.stat-l{font-size:.68rem;color:var(--muted);margin-top:4px;letter-spacing:.06em;text-transform:uppercase}
+.reviews{display:flex;flex-direction:column;gap:10px}
+.review{
+  background:var(--surface);
+  border:1px solid var(--edge);
+  border-radius:var(--r-lg);
+  padding:18px;
+}
+.review-stars{color:#fbbf24;font-size:.9rem;margin-bottom:8px;letter-spacing:2px}
+.review-txt{font-size:.86rem;line-height:1.6;color:rgba(242,244,240,.8);margin-bottom:8px}
+.review-who{font-size:.72rem;color:var(--muted)}
+.review-placeholder{
+  border:1.5px dashed var(--dim);
+  border-radius:var(--r-lg);
+  padding:24px;text-align:center;
+  color:var(--dim);font-size:.82rem;line-height:1.7;
+}
+
+/* ====================================================
+   MAP
+==================================================== */
+#localizacao{background:var(--deep)}
+.map-wrap{
+  border-radius:var(--r-xl);overflow:hidden;
+  border:1px solid var(--edge);
+  height:230px;margin-bottom:16px;
+}
+.map-wrap iframe{width:100%;height:100%;border:0;display:block}
+.map-row{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.map-addr{font-size:.82rem;color:var(--muted);line-height:1.65}
+.map-addr strong{display:block;color:var(--white);font-weight:600;margin-bottom:3px}
+.btn-gmaps{
+  flex-shrink:0;
+  display:inline-flex;align-items:center;gap:7px;
+  background:var(--surface);border:1px solid var(--edge2);
+  color:var(--white);border-radius:var(--r);
+  padding:10px 18px;
+  font-family:'Syne',sans-serif;font-weight:600;font-size:.8rem;letter-spacing:.04em;
+  transition:background .18s,border-color .18s,transform .15s;
+  white-space:nowrap;
+}
+.btn-gmaps:hover{background:var(--raised);border-color:rgba(255,255,255,.25);transform:translateY(-1px)}
+.btn-gmaps svg{width:14px;height:14px;stroke:currentColor;stroke-width:1.75;fill:none;flex-shrink:0}
+
+/* ====================================================
+   CTA FINAL
+==================================================== */
+#cta-final{
+  background:var(--void);text-align:center;
+  padding:72px 20px 80px;
+  position:relative;overflow:hidden;
+}
+#cta-final::before{
+  content:'';
+  position:absolute;top:50%;left:50%;
+  transform:translate(-50%,-50%);
+  width:400px;height:400px;
+  background:radial-gradient(circle, rgba(198,255,0,.06) 0%, transparent 70%);
+  pointer-events:none;
+}
+.cta-sup{
+  font-size:.72rem;font-weight:600;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--muted);
+  margin-bottom:14px;
+}
+.cta-h{
+  font-family:'Syne',sans-serif;font-weight:800;
+  font-size:clamp(2rem,9vw,3.5rem);
+  line-height:.95;letter-spacing:-.03em;
+  margin-bottom:10px;
+}
+.cta-h em{font-style:normal;color:var(--lime);text-shadow:0 0 30px rgba(198,255,0,.4)}
+.cta-p{font-size:.9rem;color:var(--muted);margin-bottom:32px}
+.cta-stack{
+  display:flex;flex-direction:column;gap:12px;
+  max-width:380px;margin:0 auto;
+}
+
+/* ====================================================
+   FOOTER
+==================================================== */
+footer{
+  background:#04050a;
+  border-top:1px solid var(--edge);
+  padding:36px 20px 24px;
+  color:var(--muted);font-size:.78rem;
+}
+.ft-logo{
+  font-family:'Syne',sans-serif;font-weight:800;
+  font-size:1.3rem;letter-spacing:.06em;
+  color:var(--lime);
+  text-shadow:0 0 16px rgba(198,255,0,.3);
+  margin-bottom:6px;
+}
+.ft-links{
+  display:flex;gap:18px;flex-wrap:wrap;
+  margin:14px 0 18px;
+}
+.ft-links a{color:var(--dim);transition:color .2s}
+.ft-links a:hover{color:var(--white)}
+.ft-hr{height:1px;background:var(--edge);margin-bottom:16px}
+.ft-bottom{display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
+.ft-cnpj{font-size:.72rem;color:var(--dim)}
+
+/* ====================================================
+   ANIMATIONS
+==================================================== */
+@keyframes fadeup{
+  from{opacity:0;transform:translateY(20px)}
+  to{opacity:1;transform:translateY(0)}
+}
+.anim{
+  opacity:0;transform:translateY(20px);
+  transition:opacity .5s ease, transform .5s ease;
+}
+.anim.in{opacity:1;transform:translateY(0)}
+
+/* ====================================================
+   MOBILE EDGE CASES
+==================================================== */
+@media(max-width:380px){
+  .hero-title{font-size:2.5rem}
+  .cta-h{font-size:2rem}
+}
+  </style>
+</head>
+<body>
+
+<!-- FAB -->
+<a id="fab" href="https://wa.me/5511988523923?text=Ol%C3%A1!%20Vim%20pelo%20site%20da%20Adega%20Rota%20709%20%F0%9F%8D%BB%20quero%20fazer%20um%20pedido." target="_blank" rel="noopener" aria-label="WhatsApp">
+  <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
+
+<!-- TOPBAR -->
+<header id="topbar">
+  <div class="tb-logo">ROTA 709</div>
+  <div class="tb-open"><span class="tb-dot"></span>Aberto agora</div>
+  <a class="tb-btn" href="https://wa.me/5511988523923?text=Ol%C3%A1!%20Vim%20pelo%20site%20da%20Adega%20Rota%20709%20%F0%9F%8D%BB%20quero%20fazer%20um%20pedido." target="_blank" rel="noopener">Pedir agora</a>
+</header>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg-text" aria-hidden="true">709</div>
+  <div class="hero-content">
+    <div class="hero-chip"><span class="tb-dot" style="width:6px;height:6px"></span>📍 Itapevi &amp; Região · <b>Delivery disponível</b></div>
+    <h1 class="hero-title">
+      ADEGA<br>
+      <span class="hl">ROTA 709</span>
+    </h1>
+    <p class="hero-sub">Bebida gelada em minutos na sua casa. Itapevi e região.</p>
+    <div class="hero-ctas">
+      <a class="cta-wa" href="https://wa.me/5511988523923?text=Ol%C3%A1!%20Vim%20pelo%20site%20da%20Adega%20Rota%20709%20%F0%9F%8D%BB%20quero%20fazer%20um%20pedido." target="_blank" rel="noopener">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        PEDIR NO WHATSAPP AGORA
+      </a>
+      <a class="cta-anota" href="https://pedido.anota.ai/loja/adega-rota-709" target="_blank" rel="noopener">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+        FAZER PEDIDO NO ANOTA.AI
+      </a>
+    </div>
+    <div class="hero-foot">
+      <div class="hero-stat">
+        <span class="hero-stat-v">Itapevi/SP</span>
+        <span class="hero-stat-l">Localização</span>
+      </div>
+      <div class="hero-stat">
+        <span class="hero-stat-v">Aberto</span>
+        <span class="hero-stat-l">Status agora</span>
+      </div>
+      <div class="hero-stat">
+        <span class="hero-stat-v">@rota_709adega</span>
+        <span class="hero-stat-l">Instagram</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- URGENCY TICKER -->
+<div id="urgency" role="marquee">
+  <div class="ticker">
+    <div class="ticker-item">Entrega rápida em Itapevi</div>
+    <div class="ticker-item">Cerveja bem gelada</div>
+    <div class="ticker-item">Aberto até tarde</div>
+    <div class="ticker-item">Resposta imediata no WhatsApp</div>
+    <div class="ticker-item">Melhor adega da região</div>
+    <div class="ticker-item">Entrega rápida em Itapevi</div>
+    <div class="ticker-item">Cerveja bem gelada</div>
+    <div class="ticker-item">Aberto até tarde</div>
+    <div class="ticker-item">Resposta imediata no WhatsApp</div>
+    <div class="ticker-item">Melhor adega da região</div>
+  </div>
+</div>
+
+<!-- PILLS -->
+<div id="pills">
+  <div class="pill anim">
+    <div class="pill-icon">⚡</div>
+    <div class="pill-t">Entrega Rápida</div>
+    <div class="pill-s">Itapevi e região</div>
+  </div>
+  <div class="pill anim">
+    <div class="pill-icon">🌙</div>
+    <div class="pill-t">Aberto Tarde</div>
+    <div class="pill-s">Todos os dias</div>
+  </div>
+  <div class="pill anim">
+    <div class="pill-icon">🧊</div>
+    <div class="pill-t">Super Gelado</div>
+    <div class="pill-s">Sempre estocado</div>
+  </div>
+</div>
+
+<!-- PRODUTOS -->
+<section id="produtos" class="sec">
+  <p class="sec-tag anim">Cardápio</p>
+  <h2 class="sec-h anim">O que você quer?</h2>
+  <p class="sec-sub anim">Escolha e peça em segundos.</p>
+  <div class="prod-grid">
+
+    <div class="prod anim">
+      <div class="prod-thumb">🍺</div>
+      <div class="prod-body">
+        <div class="prod-name">Cervejas</div>
+        <div class="prod-desc">Nacionais, importadas e artesanais. Lata, long neck e caixinha gelada.</div>
+        <a class="prod-cta" href="https://wa.me/5511988523923?text=Ol%C3%A1!%20Quero%20pedir%20cervejas%20%F0%9F%8D%BA" target="_blank" rel="noopener">
+          Pedir agora →
+        </a>
+      </div>
+    </div>
+
+    <div class="prod anim">
+      <div class="prod-thumb">🥃</div>
+      <div class="prod-body">
+        <div class="prod-name">Destilados</div>
+        <div class="prod-desc">Whisky, vodka, gin, rum, tequila e cachaça premium.</div>
+        <a class="prod-cta" href="https://wa.me/5511988523923?text=Ol%C3%A1!%20Quero%20pedir%20destilados%20%F0%9F%A5%83" target="_blank" rel="noopener">
+          Pedir agora →
+        </a>
+      </div>
+    </div>
+
+    <div class="prod anim">
+      <div class="prod-thumb">⚡</div>
+      <div class="prod-body">
+        <div class="prod-name">Energéticos</div>
+        <div class="prod-desc">Red Bull, Monster, TNT e diversas versões e sabores.</div>
+        <a class="prod-cta" href="https://wa.me/5511988523923?text=Ol%C3%A1!%20Quero%20pedir%20energ%C3%A9ticos%20%E2%9A%A1" target="_blank" rel="noopener">
+          Pedir agora →
+        </a>
+      </div>
+    </div>
+
+    <div class="prod anim">
+      <div class="prod-thumb">🍹</div>
+      <div class="prod-body">
+        <div class="prod-name">Ice / Drinks</div>
+        <div class="prod-desc">Smirnoff Ice, Beats e drinks prontos para beber.</div>
+        <a class="prod-cta" href="https://wa.me/5511988523923?text=Ol%C3%A1!%20Quero%20pedir%20drinks%20%F0%9F%8D%B9" target="_blank" rel="noopener">
+          Pedir agora →
+        </a>
+      </div>
+    </div>
+
+    <div class="prod prod-full anim">
+      <div class="prod-thumb">🚬</div>
+      <div class="prod-body">
+        <div class="prod-name">Tabacaria</div>
+        <div class="prod-desc">Cigarros, isqueiros, narguile e acessórios. Entrega junto com o pedido de bebidas.</div>
+        <a class="prod-cta" href="https://wa.me/5511988523923?text=Ol%C3%A1!%20Quero%20ver%20os%20produtos%20de%20tabacaria" target="_blank" rel="noopener">
+          Pedir agora →
+        </a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- PROVA SOCIAL -->
+<section id="prova" class="sec">
+  <p class="sec-tag anim">Quem pediu</p>
+  <h2 class="sec-h anim">Voltou sempre.</h2>
+  <div class="stats-row">
+    <div class="stat anim">
+      <!-- Edite o número: -->
+      <div class="stat-n" id="ctr-pedidos">500+</div>
+      <div class="stat-l">pedidos/mês</div>
+    </div>
+    <div class="stat anim">
+      <div class="stat-n">⭐ 5.0</div>
+      <div class="stat-l">avaliação</div>
+    </div>
+    <div class="stat anim">
+      <div class="stat-n">&lt;30</div>
+      <div class="stat-l">min entrega</div>
+    </div>
+  </div>
+  <div class="reviews">
+    <div class="review anim">
+      <div class="review-stars">★★★★★</div>
+      <p class="review-txt">"Pedi no WhatsApp e a entrega foi rapidíssima! Cerveja chegou gelada. Com certeza vou pedir sempre aqui."</p>
+      <div class="review-who">Marcos T. — Itapevi</div>
+    </div>
+    <div class="review anim">
+      <div class="review-stars">★★★★★</div>
+      <p class="review-txt">"Melhor adega da região! Atendimento nota 10, entrega rápida e preço justo. Recomendo demais!"</p>
+      <div class="review-who">Ana P. — Chácara Santa Cecília</div>
+    </div>
+    <div class="review-placeholder anim">
+      Adicione aqui prints reais de clientes<br>
+      <small style="opacity:.5">Edite o HTML para inserir mais avaliações</small>
+    </div>
+  </div>
+</section>
+
+<!-- MAPA -->
+<section id="localizacao" class="sec">
+  <p class="sec-tag anim">Localização</p>
+  <h2 class="sec-h anim">Onde estamos.</h2>
+  <div class="map-wrap anim">
+    <iframe
+      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3660.5!2d-47.063!3d-23.542!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2sEstr.+Beatriz+Rufino+Bpo.+664,+Itapevi!5e0!3m2!1spt-BR!2sbr!4v1"
+      allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+      title="Adega Rota 709 no Google Maps">
+    </iframe>
+  </div>
+  <div class="map-row anim">
+    <div class="map-addr">
+      <strong>Adega Rota 709</strong>
+      Estr. Beatriz Rufino Bpo., 664<br>
+      Chácara Santa Cecília · Itapevi/SP · 06655-570
+    </div>
+    <a class="btn-gmaps"
+       href="https://www.google.com/maps/search/Adega+Rota+709+Itapevi+SP"
+       target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+      Abrir no Google Maps
+    </a>
+  </div>
+</section>
+
+<!-- CTA FINAL -->
+<section id="cta-final">
+  <p class="cta-sup anim">Hoje é dia de beber?</p>
+  <h2 class="cta-h anim">Vai beber hoje?<br><em>Resolve agora</em><br>em 1 clique.</h2>
+  <p class="cta-p anim">Entrega rápida · Bebida gelada · Sem complicação</p>
+  <div class="cta-stack anim">
+    <a class="cta-wa" href="https://wa.me/5511988523923?text=Ol%C3%A1!%20Vim%20pelo%20site%20da%20Adega%20Rota%20709%20%F0%9F%8D%BB%20quero%20fazer%20um%20pedido." target="_blank" rel="noopener">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+      PEDIR NO WHATSAPP AGORA
+    </a>
+    <a class="cta-anota" href="https://pedido.anota.ai/loja/adega-rota-709" target="_blank" rel="noopener">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+      FAZER PEDIDO NO ANOTA.AI
+    </a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="ft-logo">ROTA 709</div>
+  <p style="font-size:.8rem">Adega Rota 709 · Bebidas com entrega em Itapevi e região</p>
+  <div class="ft-links">
+    <a href="https://wa.me/5511988523923" target="_blank" rel="noopener">WhatsApp</a>
+    <a href="https://instagram.com/rota_709adega" target="_blank" rel="noopener">@rota_709adega</a>
+    <a href="https://pedido.anota.ai/loja/adega-rota-709" target="_blank" rel="noopener">Anota.ai</a>
+    <a href="https://www.google.com/maps/search/Adega+Rota+709+Itapevi" target="_blank" rel="noopener">Maps</a>
+  </div>
+  <div class="ft-hr"></div>
+  <div class="ft-bottom">
+    <span>Estr. Beatriz Rufino Bpo., 664 — Itapevi/SP 06655-570</span>
+    <span class="ft-cnpj">CNPJ: __.___.___/____-__</span>
+  </div>
+  <p style="margin-top:14px;font-size:.68rem;color:var(--dim)">
+    © 2025 Adega Rota 709. Venda proibida para menores de 18 anos. 🔞
+  </p>
+</footer>
+
+<script>
+  // Scroll-reveal
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('in');
+        obs.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -32px 0px' });
+  document.querySelectorAll('.anim').forEach((el, i) => {
+    el.style.transitionDelay = (i % 4) * 0.07 + 's';
+    obs.observe(el);
+  });
+
+  // Animated counter
+  function countUp(el, target, suffix) {
+    let v = 0, step = Math.ceil(target / 50);
+    const t = setInterval(() => {
+      v = Math.min(v + step, target);
+      el.textContent = v + suffix;
+      if (v >= target) clearInterval(t);
+    }, 28);
+  }
+  const ctrEl = document.getElementById('ctr-pedidos');
+  const ctrObs = new IntersectionObserver(([e]) => {
+    if (e.isIntersecting) { countUp(ctrEl, 500, '+'); ctrObs.disconnect(); }
+  }, { threshold: 0.5 });
+  if (ctrEl) ctrObs.observe(ctrEl);
+</script>
+</body>
+</html>
